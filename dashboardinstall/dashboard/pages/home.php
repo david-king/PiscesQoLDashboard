@@ -41,6 +41,7 @@ $info['AutoMaintain'] = trim(file_get_contents("/var/dashboard/services/auto-mai
 $info['AutoUpdate'] = trim(file_get_contents("/var/dashboard/services/auto-update"));
 $info['Uptime'] = str_replace("up ", "", shell_exec('uptime -p'));
 $info['VPN'] = trim($vpn[0]);
+$info['Heart'] = trim(file_get_contents("/var/dashboard/services/crontabsync"));
 if($gps == 1)
 {
 $info['GPS'] = 'Enabled';
@@ -217,6 +218,22 @@ echo '</a>';
 echo '</li>';
 }
 
+if($info['Heart'] == 'enabled')
+{
+    echo '<li id="SyncHeart_status" class="enabled">';
+    echo '<a href="#" onclick="CrontabSync(\'enabled\');" title="SyncHeart enabled">';
+    echo '<span class="icon-loop2"></span>';
+    echo '</a>';
+    echo '</li>';
+}
+else
+{
+    echo '<li id="SyncHeart_status" class="disabled">';
+    echo '<a href="#" onclick="CrontabSync(\'disabled\');" title="SyncHeart disabled">';
+    echo '<span class="icon-loop2"></span>';
+    echo '</a>';
+    echo '</li>';
+}
 
 ?>
 </ul>

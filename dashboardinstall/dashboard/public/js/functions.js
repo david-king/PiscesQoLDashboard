@@ -219,3 +219,88 @@ function ClosePrompt()
 	var prompt = document.getElementsByClassName("closeable_prompt_overlay");
 	prompt[0].remove();
 }
+
+function SetSyncHeartPrompt(url, crontab)
+{
+	var syncheartbox = document.createElement("div");
+	syncheartbox.className = "closeable_prompt_overlay";
+	syncheartbox.innerHTML = '<div id="closeable_prompt"><div id="prompt_title"><h2>Set Sycn Heart</h2><button type="button" onclick="ClosePrompt()" value="Close" title="Close" id="CloseButton">X</button></div><div id="prompt_body"><div id="inputs"><label for="url">url:</label><input type="text" id="url" name="url" value="'+url+'" /><br /><label for="crontab">crontab:</label><input type="text" id="crontab" name="crontab" value="'+crontab+'" /></div></div><div id="prompt_footer"><button id="set_heart_button" onclick="SetSyncHeart()" ; type="button">Submit</button></div>';
+
+	document.body.appendChild(syncheartbox);
+}
+
+function SetSyncHeart()
+{
+	var url = document.getElementById("url").value;
+	var crontab = document.getElementById("crontab").value;
+	var params = 'url='+url+'&crontab='+crontab;
+	httpRequest = new XMLHttpRequest();
+	httpRequest.open('POST', 'SetSyncHeart.php', true);
+	httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	httpRequest.onreadystatechange = function() {
+		if(httpRequest.readyState == 4 && httpRequest.status == 200) {
+			alert(httpRequest.responseText);
+			var prompt = document.getElementsByClassName("closeable_prompt_overlay");
+			prompt[0].remove();
+			location.reload();
+		}
+	}
+
+	httpRequest.send(params);
+}
+
+function CrontabSync(status)
+{
+	httpRequest = new XMLHttpRequest();
+	httpRequest.open('GET', 'CrontabSync.php?status='+status, true);
+	httpRequest.send();
+	httpRequest.onreadystatechange = function() {
+		if(httpRequest.readyState == 4 && httpRequest.status == 200) {
+			location.reload();
+		}
+	}
+}
+
+function SetFastSyncLocalhostPrompt(data)
+{
+	var div = document.createElement("div");
+	div.className = "closeable_prompt_overlay";
+	div.innerHTML = '<div id="closeable_prompt"><div id="prompt_title"><h2>Set Fast Sync Localhost</h2><button type="button" onclick="ClosePrompt()" value="Close" title="Close" id="CloseButton">X</button></div><div id="prompt_body"><div id="inputs"><label for="file_url">file_url:</label><input type="text" id="file_url" name="file_url" value="'+data+'" /></div></div><div id="prompt_footer"><button id="set_file_path_button" onclick="SetFastSyncLocalhost()" ; type="button">Submit</button><button id="sync_button" onclick="FastSyncLocalhost()" ; type="button">start</button></div>';
+
+	document.body.appendChild(div);
+}
+
+function SetFastSyncLocalhost()
+{
+	var file_url = document.getElementById("file_url").value;
+	var params = 'file_url='+file_url;
+	httpRequest = new XMLHttpRequest();
+	httpRequest.open('POST', 'SetFastSyncLocalhost.php', true);
+	httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	httpRequest.onreadystatechange = function() {
+		if(httpRequest.readyState == 4 && httpRequest.status == 200) {
+			alert(httpRequest.responseText);
+			var prompt = document.getElementsByClassName("closeable_prompt_overlay");
+			prompt[0].remove();
+			location.reload();
+		}
+	}
+
+	httpRequest.send(params);
+}
+
+function FastSyncLocalhost()
+{
+	httpRequest = new XMLHttpRequest();
+	httpRequest.open('POST', 'FastSyncLocalhost.php', true);
+	httpRequest.onreadystatechange = function() {
+		if(httpRequest.readyState == 4 && httpRequest.status == 200) {
+			if(httpRequest.responseText.indexOf('Error') != -1) {
+				alert(httpRequest.responseText);
+			} else {
+				location.reload();
+			}
+		}
+	}
+	httpRequest.send();
+}

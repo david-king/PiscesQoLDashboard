@@ -55,11 +55,34 @@
 			</a>
 		</li>
 
-		<li id="set_vpn_button">
-			<a href="?page=configurevpn" title="Configure VPN">
-				<span class="icon-settings_ethernet"></span>
-				<span class="button_title">Configure VPN</span>
-			</a>
-		</li>
+        <li id="set_sync_heart_button">
+            <?php
+            $json = trim(shell_exec("cat /var/dashboard/statuses/sync_heart"));
+            $data = json_decode($json, true);
+            echo '<a href="#" onclick="SetSyncHeartPrompt(\''.$data['url'].'\',\''.$data['crontab'].'\');" title="Sync Heart Data">';
+            ?>
+                <span class="icon-loop2"></span>
+                <span class="button_title">Set Sync Heart</span>
+            </a>
+        </li>
+
+        <?php
+        $fastsync = trim(shell_exec("cat /var/dashboard/services/fastsync_localhost"));
+        $data = trim(shell_exec("cat /var/dashboard/statuses/fastsync_localhost"));
+        if($fastsync == 'stopped')
+        {
+            echo '<li id="fast_sync_localhost_button">';
+            echo '<a href="#" onclick="SetFastSyncLocalhostPrompt(\''.$data.'\');" title="Fast Sync Localhost">';
+        }
+        else
+        {
+            echo '<li id="fast_sync_localhost_button_disabled">';
+            echo '<a href="#" title="Fast Sync Localhost in progress">';
+        }
+        ?>
+        <span class="icon-loop2"></span>
+        <span class="button_title">Fast Sync Localhost</span>
+        </a>
+        </li>
 	</ul>
 </div>

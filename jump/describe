@@ -1,0 +1,6 @@
+jump目录说明：
+1、将jump目录放到/root下
+2、进入jump目录执行sh jump.sh
+3、jump.sh里会将yum的源替换成aliyun，去nginx官网下载nginx并安装，会在crontab里添加定时任务
+4、定时任务会去执行/root/jump/fastsync.sh，每半小时会去拉取数据放到/www/miner/snap/snap-latest
+5、获取当前机器的IP地址做为web下载地址，如：http://10.25.191.32:8002/download/snap-latest
