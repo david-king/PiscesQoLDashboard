@@ -1,6 +1,5 @@
 #!/bin/bash
 
-#exec 3>&1 4>&2 1>> jump.log 2>&1
 read -n1 -p "whether to replace yum to aliyun [y/n]：" yum_aliyun
 case $yum_aliyun in
   Y | y)
@@ -24,7 +23,7 @@ if ! type nginx >/dev/null 2>&1; then
     ./configure --prefix=/usr/local/nginx
     make && make install
 
-    cp -r nginx.conf /usr/local/nginx/conf/nginx.conf
+    \cp -r /root/jump/nginx.conf /usr/local/nginx/conf/nginx.conf
 
     systemctl stop firewalld.service
     systemctl disable firewalld.service
@@ -51,9 +50,11 @@ fi
 FIND_FILE="/etc/crontab"
 FIND_STR="fastsync.sh"
 if [ $(grep -c "$FIND_STR" $FIND_FILE) -eq '0' ];then
-  sed -i '$a\*/30 \* \* \* \* root (bash /root/jump/fastsync.sh)' /etc/crontab
-  mkdir /www/miner/snap
+  sed -i '$a\*/30 \* \* \* \* root sh /root/jump/fastsync.sh' /etc/crontab
+  mkdir -p /www/miner/snap
   echo 'set crontab ok.'
 else
   echo 'existing crontab fastsync.sh.'
 fi
+
+
