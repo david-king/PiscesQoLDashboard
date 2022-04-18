@@ -56,5 +56,3 @@ if [ $(grep -c "$FIND_STR" $FIND_FILE) -eq '0' ];then
 else
   echo 'existing crontab fastsync.sh.'
 fi
-
-
