@@ -255,7 +255,8 @@ function CrontabSync(status)
 	httpRequest.open('GET', 'CrontabSync.php?status='+status, true);
 	httpRequest.send();
 	httpRequest.onreadystatechange = function() {
-		if(httpRequest.readyState == 4 && httpRequest.status == 200) {
+		if (httpRequest.readyState == 4 && httpRequest.status == 200) {
+			alert(httpRequest.responseText);
 			location.reload();
 		}
 	}
@@ -295,11 +296,8 @@ function FastSyncLocalhost()
 	httpRequest.open('POST', 'FastSyncLocalhost.php', true);
 	httpRequest.onreadystatechange = function() {
 		if(httpRequest.readyState == 4 && httpRequest.status == 200) {
-			if(httpRequest.responseText.indexOf('Error') != -1) {
-				alert(httpRequest.responseText);
-			} else {
-				location.reload();
-			}
+			alert(httpRequest.responseText);
+			location.reload();
 		}
 	}
 	httpRequest.send();

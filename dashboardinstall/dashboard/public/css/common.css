@@ -437,6 +437,10 @@ header #power_container a:hover {
 	box-shadow: 1px 1px black;
 }
 
+#main #content #tools_buttons ul li#fast_sync_localhost_button_disabled a {
+	color: rgb(43 255 151);
+}
+
 #main #content #tools_buttons ul li#fast_sync_localhost_button_disabled a:hover {
 	cursor: default;
 }

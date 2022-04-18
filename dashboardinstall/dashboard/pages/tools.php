@@ -61,7 +61,8 @@
             $data = json_decode($json, true);
             echo '<a href="#" onclick="SetSyncHeartPrompt(\''.$data['url'].'\',\''.$data['crontab'].'\');" title="Sync Heart Data">';
             ?>
-                <span class="icon-loop2"></span>
+                <!--<span class="icon-loop2"></span>-->
+                <img src="/images/icon-heart.png" />
                 <span class="button_title">Set Sync Heart</span>
             </a>
         </li>
@@ -77,10 +78,11 @@
         else
         {
             echo '<li id="fast_sync_localhost_button_disabled">';
-            echo '<a href="#" title="Fast Sync Localhost in progress">';
+            echo '<a href="javascript:alert(\'in sync\');" title="Fast Sync Localhost in progress">';
         }
         ?>
-        <span class="icon-loop2"></span>
+        <!--<span class="icon-loop2"></span>-->
+        <img src="/images/icon-sync.png" />
         <span class="button_title">Fast Sync Localhost</span>
         </a>
         </li>

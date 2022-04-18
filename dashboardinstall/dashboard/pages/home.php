@@ -222,7 +222,7 @@ if($info['Heart'] == 'enabled')
 {
     echo '<li id="SyncHeart_status" class="enabled">';
     echo '<a href="#" onclick="CrontabSync(\'enabled\');" title="SyncHeart enabled">';
-    echo '<span class="icon-loop2"></span>';
+    echo '<img src="/images/icon-heart.png">';
     echo '</a>';
     echo '</li>';
 }
@@ -230,7 +230,7 @@ else
 {
     echo '<li id="SyncHeart_status" class="disabled">';
     echo '<a href="#" onclick="CrontabSync(\'disabled\');" title="SyncHeart disabled">';
-    echo '<span class="icon-loop2"></span>';
+    echo '<img src="/images/icon-heart.png">';
     echo '</a>';
     echo '</li>';
 }

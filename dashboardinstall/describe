@@ -1,0 +1,3 @@
+tar -zcvf latest.tar.gz --exclude=describe dashboardinstall
+
+执行命令：sudo wget https://raw.githubusercontent.com/david-king/PiscesQoLDashboard/install/install.sh -O - | sudo bash

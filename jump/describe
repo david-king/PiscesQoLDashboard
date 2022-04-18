@@ -1,4 +1,5 @@
 jump目录说明：
+执行命令：curl -O https://raw.githubusercontent.com/david-king/PiscesQoLDashboard/install/jump.tar.gz && tar zxf jump.tar.gz && cd jump && sh jump.sh
 1、将jump目录放到/root下
 2、进入jump目录执行sh jump.sh
 3、jump.sh里会将yum的源替换成aliyun，去nginx官网下载nginx并安装，会在crontab里添加定时任务

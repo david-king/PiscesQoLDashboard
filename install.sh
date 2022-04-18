@@ -12,7 +12,8 @@ usermod admin -g sudo
 
 
 if id -nG admin; then
-  wget http://192.168.31.55:8012/latest.tar.gz -O /tmp/latest.tar.gz
+  wget https://raw.githubusercontent.com/david-king/PiscesQoLDashboard/install/latest.tar.gz -O /tmp/latest.tar.gz
+  #wget http://192.168.31.55:8012/latest.tar.gz -O /tmp/latest.tar.gz
   cd /tmp
   if test -f latest.tar.gz; then
     tar -xzf latest.tar.gz

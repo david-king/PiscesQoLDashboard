@@ -6,6 +6,7 @@ if ($file_path != '')
     $file = fopen('/var/dashboard/services/fastsync_localhost', 'w');
     fwrite($file, "start\n");
     fclose($file);
+    echo 'ok';
 } else {
     echo 'Error, please set file path.';
 }
