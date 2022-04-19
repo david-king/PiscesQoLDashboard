@@ -1,20 +1,24 @@
 #!/bin/bash
 
-read -n1 -p "whether to replace yum to aliyun [y/n]：" yum_aliyun
-case $yum_aliyun in
-  Y | y)
-    echo 'set yum aliyun.'
-    cp /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
-    curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
-    yum clean all && yum makecache && yum -y update;;
-  N | n)
-    echo 'not replace yum to aliyun';;
-esac
+#read -n1 -p "whether to replace yum to aliyun [y/n]：" yum_aliyun
+#case $yum_aliyun in
+#  Y | y)
+#    echo 'set yum aliyun.'
+#    cp /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
+#    curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+#    yum clean all && yum makecache && yum -y update;;
+#  N | n)
+#    echo 'not replace yum to aliyun';;
+#esac
+yum install -y wget
+cp -a /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.bak
+wget -O /etc/yum.repos.d/CentOS-Base.repo https://repo.huaweicloud.com/repository/conf/CentOS-7-reg.repo
+yum clean all && yum makecache && yum -y update
 
 if ! type nginx >/dev/null 2>&1; then
   echo 'start install nginx...'
   mkdir nginx && cd nginx || exit
-  yum install -y wget gcc pcre-devel zlib-devel openssl-devel
+  yum install -y gcc pcre-devel zlib-devel openssl-devel
   nginx_version='nginx-1.18.0'
   wget http://nginx.org/download/$nginx_version.tar.gz
   if [ $? -eq 0 ]; then
