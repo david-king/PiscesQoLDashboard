@@ -18,7 +18,7 @@
 if ! type nginx >/dev/null 2>&1; then
   echo 'start install nginx...'
   mkdir nginx && cd nginx || exit
-  yum install -y wget gcc pcre-devel zlib-devel openssl-devel
+  yum install -y wget gcc pcre-devel zlib-devel openssl-devel ca-certificates
   nginx_version='nginx-1.18.0'
   wget http://nginx.org/download/$nginx_version.tar.gz
   if [ $? -eq 0 ]; then
