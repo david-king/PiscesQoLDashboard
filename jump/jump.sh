@@ -54,6 +54,7 @@ fi
 FIND_FILE="/etc/crontab"
 FIND_STR="fastsync.sh"
 if [ $(grep -c "$FIND_STR" $FIND_FILE) -eq '0' ];then
+  #*/30 * * * * root sh /root/jump/fastsync.sh >> /root/jump/fastsync.log 2>&1
   sed -i '$a\*/30 \* \* \* \* root sh /root/jump/fastsync.sh' /etc/crontab
   mkdir -p /www/miner/snap
   echo 'set crontab ok.'
