@@ -1,9 +1,11 @@
 <?php
 
 // 内网IP
-$info['hostIp'] = trim(file_get_contents("/var/dashboard/statuses/local-ip"));
+$hostIp = trim(file_get_contents("/var/dashboard/statuses/local-ip"));
+$info['hostIp'] = $hostIp!=''?trim(explode(':', $hostIp)[1]):'';
 // 壁垒机IP
-$info['jumpIp'] = trim(file_get_contents("/var/dashboard/statuses/fastsync_localhost"));
+$jumpIp = trim(file_get_contents("/var/dashboard/statuses/fastsync_localhost"));
+$info['jumpIp'] = $jumpIp!=''?parse_url($jumpIp)['host']:'';
 // 本机高度
 $info['minerHeight'] = trim(file_get_contents("/var/dashboard/statuses/infoheight"));
 // 主网高度
@@ -16,9 +18,7 @@ $disktotal = disk_total_space(".") / 1073741824;
 $diskused = $disktotal - $diskfree;
 $info['disk'] = round($diskused/$disktotal*100, 2);
 // 主机码
-$info['Public_key'] = trim(file_get_contents("/var/dashboard/statuses/pubkey"));
-// 当前请求时间
-$info['updateTime'] = time();
+$info['hotspotId'] = trim(file_get_contents("/var/dashboard/statuses/pubkey"));
 // 主机状态，1在线，2离线，3异常，4同步，5下架。
 $info['onlineStatus'] = 1;
 $online = trim(file_get_contents("/var/dashboard/statuses/online_status"));

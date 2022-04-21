@@ -8,7 +8,7 @@ try {
         switch ($status) {
             // 开
             case 'enabled':
-                $file = fopen('/var/dashboard/services/crontabsycn', 'w');
+                $file = fopen('/var/dashboard/services/crontabsync', 'w');
                 fwrite($file, "disabled\n");
                 fclose($file);
 
